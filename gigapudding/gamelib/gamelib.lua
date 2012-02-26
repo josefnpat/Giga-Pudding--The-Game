@@ -90,7 +90,7 @@ function gamelib.update (dt)
         end
     end
   end
-  gamelib.score = math.floor(gamelib.playersize*(gamelib.score_time/60+1)*(gamelib.distance/100+400)/4)-1000
+  gamelib.score = math.floor(gamelib.playersize*(1/gamelib.score_time/60+1)*(gamelib.distance/100+400)/4)-1000
   gamelib.playery = 600-math.sin(gamelib.jump_dt)*400
   gamelib.current_donuts = math.floor((gamelib.playersize)*10)-100
   if gamelib.current_donuts >= gamelib.win_cond then
