@@ -12,3 +12,5 @@ Get extra points by running right!
 If you get 100 donuts, you win the game!
 
 PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI PUDDI 
+
+Shout out to <a href="https://love2d.org/forums/memberlist.php?mode=viewprofile&u=3988">Coffee</a> who redrew a bunch of the sprites!

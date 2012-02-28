@@ -6,7 +6,12 @@ love.audio.play(music)
 
 assets = {}
 assets.city = love.graphics.newImage("assets/city.png")
-assets.donut0 = love.graphics.newImage("assets/donut0.png")
+assets.donut = {}
+assets.donut[1] = love.graphics.newImage("assets/donut1.png")
+assets.donut[2] = love.graphics.newImage("assets/donut2.png")
+assets.donut[3] = love.graphics.newImage("assets/donut3.png")
+assets.donut[4] = love.graphics.newImage("assets/donut4.png")
+assets.donut[5] = love.graphics.newImage("assets/donut5.png")
 assets.fullbow = love.graphics.newImage("assets/fullbow.png")
 assets.puddi = love.graphics.newImage("assets/puddi.png")
 assets.puddiquad = {}
@@ -21,8 +26,6 @@ assets.bgcolor = {r = 3, g = 112, b = 194}
 assets.barcolor = {r = 255, g = 159, b = 23}
 assets.font = love.graphics.newFont("assets/Sniglet-Regular.ttf",32)
 assets.font_large = love.graphics.newFont("assets/Sniglet-Regular.ttf",64)
-
-
 
 introlib = {}
 

@@ -36,6 +36,8 @@ function gamelib.update (dt)
       local temp = {
         x = 900,
         y = math.random(50,450),
+        s = math.random(1,5),
+        rd = math.random(-1,1),
         r = 0
       }
       table.insert(gamelib.donuts,temp)
@@ -45,9 +47,10 @@ function gamelib.update (dt)
     gamelib.py = gamelib.playery-61/2*gamelib.puddiscale
     local d = 0
     for i,v in ipairs(gamelib.donuts) do
+      v.r = v.r + v.rd*dt
       v.x = v.x - 800*dt
-      d = math.sqrt((v.x+assets.donut0:getWidth()/2-gamelib.px)^2+(v.y+assets.donut0:getWidth()/2-gamelib.py)^2)
-      if d < 77/2*gamelib.puddiscale  + assets.donut0:getWidth()/2 then
+      d = math.sqrt((v.x+assets.donut[1]:getWidth()/2-gamelib.px)^2+(v.y+assets.donut[1]:getWidth()/2-gamelib.py)^2)
+      if d < 77/2*gamelib.puddiscale  + assets.donut[1]:getWidth()/2 then
         table.remove(gamelib.donuts,i)
         gamelib.playersize = gamelib.playersize + 0.1
       end
@@ -123,7 +126,7 @@ function gamelib.draw ()
         0,
         61)
     for _,v in ipairs(gamelib.donuts) do
-      love.graphics.draw(assets.donut0,v.x,v.y,v.r)
+      love.graphics.draw(assets.donut[v.s],v.x+assets.donut[1]:getWidth()/2,v.y+assets.donut[1]:getWidth()/2,v.r,1,1,assets.donut[1]:getWidth()/2,assets.donut[1]:getWidth()/2)
     end
     love.graphics.draw(assets.city,-gamelib.distance%800,(600-assets.city:getHeight()*800/assets.city:getWidth()),0,800/assets.city:getWidth())
     love.graphics.draw(assets.city,-gamelib.distance%800-800,(600-assets.city:getHeight()*800/assets.city:getWidth()),0,800/assets.city:getWidth())
@@ -138,7 +141,7 @@ function gamelib.draw ()
     if gamelib.debug then
       love.graphics.circle("line", gamelib.px, gamelib.py, 77/2*gamelib.puddiscale,32)
       for _,v in ipairs(gamelib.donuts) do
-        love.graphics.circle("line", v.x+assets.donut0:getWidth()/2, v.y+assets.donut0:getWidth()/2, assets.donut0:getWidth()/2,32)
+        love.graphics.circle("line", v.x+assets.donut[1]:getWidth()/2, v.y+assets.donut[1]:getWidth()/2, assets.donut[1]:getWidth()/2,32)
       end
       love.graphics.print("playersize:"..gamelib.playersize.."\nScore time:"..math.floor(gamelib.score_time).."\nDistance:"..math.floor(gamelib.distance).."\n",0,0)
     end
