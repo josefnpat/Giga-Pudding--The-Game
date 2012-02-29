@@ -57,6 +57,8 @@ function endlib.keypressed (key,unicode)
   if state == "end" then
     if endlib.time_dt > 3 then
       state = "intro"
+      love.audio.stop()
+      love.audio.play(music_intro)
       end_state_temp = true
       gamelib.load()
       introlib.load()
@@ -65,6 +67,11 @@ function endlib.keypressed (key,unicode)
   end  
 end
 
+
+function endlib.playmusic()
+  love.audio.stop()
+  love.audio.play(music_end)
+end
 -------------------------------------
 -- endlib.keyreleased
 -------------------------------------

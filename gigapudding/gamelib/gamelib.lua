@@ -23,6 +23,7 @@ function gamelib.load (arg)
   gamelib.win_cond = 100
   gamelib.current_donuts = 0
   gamelib.debug = false
+  gamelib.showhappy = 0
 end
 
 -------------------------------------
@@ -53,6 +54,7 @@ function gamelib.update (dt)
       if d < 77/2*gamelib.puddiscale  + assets.donut[1]:getWidth()/2 then
         table.remove(gamelib.donuts,i)
         gamelib.playersize = gamelib.playersize + 0.1
+        gamelib.showhappy = 8
       end
       if v.x < -200 then
         table.remove(gamelib.donuts,i)
@@ -62,7 +64,7 @@ function gamelib.update (dt)
     if gamelib.dt_time > 8 and gamelib.state ~= "eating" then
       gamelib.state = "eating"
       gamelib.dt_sprite = 0
-    elseif gamelib.dt_time > 12 then
+    elseif gamelib.dt_time > 13 then
       gamelib.state = "standing"
       gamelib.dt_time = 0
       gamelib.dt_sprite = 0
@@ -70,6 +72,7 @@ function gamelib.update (dt)
       if gamelib.playersize < 10 then
          gamelib.playersize = 0
         state = "end"
+        endlib.playmusic()
       end
     end
     gamelib.dt_sprite = gamelib.dt_sprite + dt*2
@@ -98,6 +101,7 @@ function gamelib.update (dt)
   gamelib.current_donuts = math.floor((gamelib.playersize)*10)-100
   if gamelib.current_donuts >= gamelib.win_cond then
     state = "end"
+    endlib.playmusic()
   end
 end
 
@@ -112,17 +116,21 @@ function gamelib.draw ()
     local temp_sprite = 1
     if gamelib.state == "standing" then
       temp_sprite = math.floor(gamelib.dt_sprite % 2) + 4
-    elseif gamelib.state == "eating" then
+    end
+    if gamelib.showhappy > 0 then
+      gamelib.showhappy = gamelib.showhappy - 1 
+      temp_sprite = 6
+    end
+    if gamelib.state == "eating" then
       temp_sprite = (math.floor(gamelib.dt_sprite % 8) + 6 ) % 11 + 1
     end
     gamelib.puddiscale = math.log(gamelib.playersize)*1.5 - 1
-    love.graphics.drawq(assets.puddi,
-      assets.puddiquad[temp_sprite],
+    love.graphics.draw(assets.puddi[temp_sprite],
         gamelib.playerx,
-        gamelib.playery,
+        gamelib.playery-235/2,
         0,
-        gamelib.puddiscale,
-        gamelib.puddiscale,
+        gamelib.puddiscale/4,
+        gamelib.puddiscale/4,
         0,
         61)
     for _,v in ipairs(gamelib.donuts) do
@@ -225,4 +233,3 @@ function gamelib.quit ()
     
   end  
 end
-

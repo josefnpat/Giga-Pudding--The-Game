@@ -1,8 +1,11 @@
+love.audio.setVolume(0.5)
 music = love.audio.newSource("assets/GigaPudding.mp3")
+music_intro = love.audio.newSource("assets/intro.mp3")
+music_end = love.audio.newSource("assets/end.mp3")
 music:setLooping(true)
-
-love.audio.setVolume(0.25)
-love.audio.play(music)
+music_intro:setLooping(false)
+music_end:setLooping(false)
+love.audio.play(music_intro)
 
 assets = {}
 assets.city = love.graphics.newImage("assets/city.png")
@@ -13,10 +16,9 @@ assets.donut[3] = love.graphics.newImage("assets/donut3.png")
 assets.donut[4] = love.graphics.newImage("assets/donut4.png")
 assets.donut[5] = love.graphics.newImage("assets/donut5.png")
 assets.fullbow = love.graphics.newImage("assets/fullbow.png")
-assets.puddi = love.graphics.newImage("assets/puddi.png")
-assets.puddiquad = {}
-for i = 0,10 do
-  assets.puddiquad[i+1]=love.graphics.newQuad(i*77,0,77,61,847,61)
+assets.puddi = {}
+for i = 1,12 do
+  assets.puddi[i] = love.graphics.newImage("assets/puddi/"..i..".png")
 end
 assets.puddititle = love.graphics.newImage("assets/puddititle.png")
 assets.soniam = love.graphics.newImage("assets/soniam.png")
@@ -67,7 +69,7 @@ function introlib.draw ()
       assets.fullbow:getHeight()
     )
     temp = introlib.dt%math.pi
-    love.graphics.draw(assets.puddititle,800/2-assets.puddititle:getWidth()/2*2,50+600-assets.puddititle:getHeight()*2-math.sin(temp)*100,0,2)
+    love.graphics.draw(assets.puddititle,800/2-assets.puddititle:getWidth()/2,50+600-20-assets.puddititle:getHeight()-math.sin(temp)*100,0)
     love.graphics.draw(assets.city,0,(600-assets.city:getHeight()*800/assets.city:getWidth()),0,800/assets.city:getWidth())
     love.graphics.setColor(assets.barcolor.r,assets.barcolor.g,assets.barcolor.b)
     love.graphics.rectangle("fill",0,550,800,600)
@@ -88,6 +90,8 @@ function introlib.keypressed (key,unicode)
       end_state_temp = nil
     else
       state = "game"
+      love.audio.stop()
+      love.audio.play(music)
     end
   end  
 end
