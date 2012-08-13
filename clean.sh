@@ -2,6 +2,6 @@
 
 # cleanup!
 
-rm FC5K_*.zip
-rm FC5K_*.tar.gz
-rm FC5K_*.love
+rm GP_*.zip
+rm GP_*.tar.gz
+rm GP_*.love
