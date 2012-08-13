@@ -1,6 +1,6 @@
 #!/bin/bash
 #Configure this, and also ensure you have the dev/build_data/osx.patch ready.
-SRC="client"
+SRC="src"
 NAME="GP"
 VERSION=0.8.0
 
